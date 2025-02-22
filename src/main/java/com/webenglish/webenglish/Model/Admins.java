@@ -17,8 +17,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "USERS")
-public class Users implements UserDetails {
+@Table(name = "ADMINS")
+public class Admins implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,7 +40,6 @@ public class Users implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
-
     public Long getId() {
         return id;
     }
