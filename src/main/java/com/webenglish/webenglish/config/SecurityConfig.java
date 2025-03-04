@@ -22,7 +22,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authorize -> authorize
+        http.authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers( "/", "/Home", "/Home/**", "/Login_Signup", "/logout", "/css/**", "/img/**", "/scss/**", "/vendor/**", "/assets/**","/Signup", "/ForgetPass","/ForgetPass/**").permitAll()
                                 .requestMatchers("/User/**", "/Movies/**").hasAnyAuthority("USER","PRE")
 //                        .requestMatchers("/User/**").hasAnyAuthority("PRE")
