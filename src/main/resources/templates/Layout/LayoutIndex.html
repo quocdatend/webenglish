@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link th:href="@{/layoutindex/assets/css/style.css}" rel="stylesheet">
+    <link th:href="@{/layoutindex/assets/css/button-search.css}" rel="stylesheet">
+    <script th:src="@{/layoutindex/assets/js/custom.js}"></script>
+</head>
+<body>
+<nav>
+    <ul class="nav">
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/vocabulary/search}">Vocabulary</a></li>
+        <li><a th:href="@{/grammar}">Grammar</a></li>
+
+        <li th:if="${username != null}">
+            <a th:href="@{/testing}">Test with me</a>
+        </li>
+        <li th:if="${username == null}">
+            <a th:href="@{/account}">Test with me</a>
+        </li>
+
+        <li th:if="${username != null}" class="account-container">
+            <button class="account-btn main-button-gradient">
+                Account <i class="fas fa-sort-down"></i>
+            </button>
+            <div class="info-box">
+                <ul>
+                    <li><a th:href="@{/account/profileUser}">Profile</a><i class="fas fa-user"></i></li>
+                    <li><a th:href="@{/account/logout}">Logout</a><i class="fas fa-sign-out-alt"></i></li>
+                </ul>
+            </div>
+        </li>
+
+        <li th:if="${username == null}">
+            <div class="main-button-gradient">
+                <a th:href="@{/account}">Login/Register</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<div th:insert="~{::main-content}"></div>
+</body>
+</html>
