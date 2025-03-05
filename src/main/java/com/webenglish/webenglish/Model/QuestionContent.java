@@ -1,13 +1,19 @@
 package com.webenglish.webenglish.Model;
 import com.webenglish.webenglish.Model.Exams;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Entity
-@Table(name = "QUESTIONS_CONTENT")
+import java.util.List;
+
 @Getter
 @Setter
+@ToString
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "QUESTIONS_CONTENT")
+
 public class QuestionContent {
 
     @Id
@@ -15,22 +21,26 @@ public class QuestionContent {
     @Column(name = "CONTENTID")
     private Integer id;
 
-    @Column(name = "QUESTIONS-STYLE", columnDefinition = "ntext")
+    @Column(name = "QUESTIONS-STYLE", length = 100)
     private String questionStyle;
 
-    @Column(name = "PICTURE", columnDefinition = "nvarchar(max)")
+    @Column(name = "PICTURE", length = 255)
     private String picture;
 
-    @Column(name = "TEXT-CONTENT", length = 500)
+    @Column(name = "TEXT-CONTENT", length = 255)
     private String textContent;
 
-    @Column(name = "ADUDI", columnDefinition = "nvarchar(max)")
+    @Column(name = "ADUDI", length = 255)
     private String audio;
 
-    @Column(name = "Text-questionsbig-ifhave", columnDefinition = "ntext")
+    @Column(name = "Text-questionsbig-ifhave", length = 255)
     private String bigQuestionText;
 
-    @ManyToOne
-    @JoinColumn(name = "EXAMID", referencedColumnName = "EXAMID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EXAMID")
     private Exams exam;
+//
+
+    @OneToMany(mappedBy = "content", cascade = CascadeType.ALL)
+    private List<Question> questions;
 }
