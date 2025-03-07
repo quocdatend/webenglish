@@ -1,14 +1,18 @@
 package com.webenglish.webenglish.Model;
 
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -22,23 +26,25 @@ public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false, length = 32)
-    @NotEmpty(message = "Tên người dùng không được để trống.")
     private String username;
-
-
-    @Column(nullable = false, length = 32)
-    @NotEmpty(message = "Mật khẩu không được để trống.")
-    private String password;
-
-    @Column(nullable = false)
-    @NotEmpty(message = "Email không được để trống.")
+    @Column(nullable = false, length = 320)
+    @Email
     private String email;
-
+    @Column(nullable = false, length = 60)
+    private String password;
+    private boolean isPre = false;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "UserRole",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId"))
+    private Set<Role> roles = new HashSet<>();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<Role> userRoles = this.getRoles();
+        return userRoles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .toList();
     }
 
     public Long getId() {
@@ -49,20 +55,16 @@ public class Users implements UserDetails {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -73,6 +75,26 @@ public class Users implements UserDetails {
         this.email = email;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isPre() {
+        return isPre;
+    }
+
+    public void setPre(boolean pre) {
+        isPre = pre;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+    @Override
+    public String getUsername() {
+        return username;
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;
