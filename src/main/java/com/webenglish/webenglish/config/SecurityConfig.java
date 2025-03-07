@@ -23,7 +23,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers( "/", "/Home", "/Home/**", "/Login_Signup", "/logout", "/css/**", "/img/**", "/scss/**", "/vendor/**", "/assets/**","/Signup", "/ForgetPass","/ForgetPass/**").permitAll()
+                                .requestMatchers("/", "/Home", "/Home/**", "/Login", "/logout", "/css/**", "/img/**", "/scss/**", "/vendor/**", "/assets/**", "/lib/**","/Signup","/Signup/**" , "/ForgetPass","/ForgetPass/**", "/layoutlogin", "/layoutlogin/**", "/layoutindex", "/layoutindex/**","/layoutadmin","/layoutadmin/**","/Test","/Test/**","/Admin").permitAll()
                                 .requestMatchers("/User/**", "/Movies/**").hasAnyAuthority("USER","PRE")
 //                        .requestMatchers("/User/**").hasAnyAuthority("PRE")
                                 .requestMatchers("/Admin/**", "/AdminMovies/**").hasAnyAuthority("ADMIN")
@@ -33,13 +33,13 @@ public class SecurityConfig {
                 //.oauth2Login(o->o.loginPage("/login").defaultSuccessUrl("/products", true)) // Login google , facebook
 
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/Login_Signup")
-                        .loginProcessingUrl("/Login_Signup")
+                        .loginPage("/Login")
+                        .loginProcessingUrl("/Login")
                         .successForwardUrl("/RedirectPage")
-                        .failureUrl("/Login_Signup?error")
+                        .failureUrl("/Login?error")
                         .permitAll())
                 .logout(logout -> logout
-                        .logoutUrl("/Login_Signup/logout") // URL tùy chỉnh để đăng xuất
+                        .logoutUrl("/Login/logout") // URL tùy chỉnh để đăng xuất
                         .logoutSuccessUrl("/Home") // URL sau khi đăng xuất thành công
                         .invalidateHttpSession(true) // Hủy phiên làm việc.
                         .clearAuthentication(true) // Xóa xác thực.

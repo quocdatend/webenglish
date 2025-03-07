@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link th:href="@{/layoutadmin/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css"  media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet"  media="all" >
+
+    <title>EduWell - Education HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/layoutindex/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css" media="all" >
+
+    <!-- Additional CSS Files -->
+    <link th:href="@{/layoutindex/assets/css/button-search.css}" rel="stylesheet" type="text/css" media="all" >
+    <link th:href="@{/layoutindex/assets/css/fontawesome.css}" rel="stylesheet" type="text/css" media="all" >
+    <link th:href="@{/layoutindex/assets/css/templatemo-eduwell-style.css}" rel="stylesheet" type="text/css" media="all" >
+    <link th:href="@{/layoutindex/assets/css/owl.css}" rel="stylesheet" type="text/css" media="all" >
+    <link th:href="@{/layoutindex/assets/css/lightbox.css}" rel="stylesheet" type="text/css" media="all" >
+    <style>
+        .account-container {
+            position: relative;
+            width: 150px;
+            height: 50px;
+        }
+
+        .account-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(-145deg, rgba(219, 138, 222, 1) 0%, rgba(246, 191, 159, 1) 100%);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .account-btn i {
+                color: white;
+                margin-left: 10px;
+            }
+
+        .info-box {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 150px;
+            height: 120px;
+            background: linear-gradient(-145deg, rgba(219, 138, 222, 1) 0%, rgba(246, 191, 159, 1) 100%);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 10px 14px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+            .info-box p {
+                padding: 10px;
+                font-size: 16px;
+                color: #333;
+            }
+
+            .info-box ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .info-box li {
+                padding: 10px;
+                border-top: 1px solid #ccc;
+            }
+
+                .info-box li:first-child {
+                    border-top: none;
+                }
+
+            .info-box a {
+                display: inline!important;
+                text-decoration: none;
+                color: white!important;
+                font-size: 16px;
+            }
+
+                .info-box i {
+                    color: white;
+                    margin-left: 10px;
+                }
+
+        .account-container.active .info-box {
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+<div th:replace="~{Header :: Header}"></div>
+<!-- ***** Main Banner Area Start ***** -->
+<section class="main-banner" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <div class="header-text">
+                    <h6>Welcome to do Testing</h6>
+                    <h2>Best Place To Testing <em>English</em></h2>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-image">
+                    <img th:src="@{/layoutindex/assets/images/banner-right-image.png}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ***** Testing English Section ***** -->
+<section class="services" id="services1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h4>Testing <em>English</em></h4>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="owl-service-item owl-carousel">
+                    <div th:each="exam : ${examList}" class="item">
+                        <a th:href="@{/doTest/{id}(id=${exam.id})}">
+                            <div class="service-item">
+                                <div class="icon">
+                                    <img th:src="@{/layoutindex/assets/images/service-icon-01.png}" alt="">
+                                </div>
+                                <h4 th:text="${exam.examName}"></h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Main Banner Area End ***** -->
+<script th:src="@{/layoutindex/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/layoutindex/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<script th:src="@{/layoutindex/assets/js/isotope.min.js}"></script>
+<script th:src="@{/layoutindex/assets/js/owl-carousel.js}"></script>
+<script th:src="@{/layoutindex/assets/js/lightbox.js}"></script>
+<script th:src="@{/layoutindex/assets/js/tabs.js}"></script>
+<script th:src="@{/layoutindex/assets/js/video.js}"></script>
+<script th:src="@{/layoutindex/assets/js/slick-slider.js}"></script>
+<script th:src="@{/layoutindex/assets/js/custom.js}"></script>
+
+<!-- ***** Alert Message ***** -->
+<div th:if="${alertMessage}" class="alert">
+    <span th:text="${alertMessage}"></span>
+</div>
+
+</body>
+</html>
