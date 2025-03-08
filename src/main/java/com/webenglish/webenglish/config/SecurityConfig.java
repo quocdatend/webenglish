@@ -39,7 +39,7 @@ public class SecurityConfig {
                         .failureUrl("/Login?error")
                         .permitAll())
                 .logout(logout -> logout
-                        .logoutUrl("/Login/logout") // URL tùy chỉnh để đăng xuất
+                        .logoutUrl("/logout") // URL tùy chỉnh để đăng xuất
                         .logoutSuccessUrl("/Home") // URL sau khi đăng xuất thành công
                         .invalidateHttpSession(true) // Hủy phiên làm việc.
                         .clearAuthentication(true) // Xóa xác thực.
@@ -52,7 +52,7 @@ public class SecurityConfig {
                         .maximumSessions(1) // Giới hạn số phiên đăng nhập.
                         .expiredUrl("/login") // Trang khi phiên hết hạn.
                 )
-                .httpBasic(withDefaults())
+                .httpBasic(httpBasic -> httpBasic.disable())
                 .authenticationProvider(authenticationProvider());
         return http.build();
     }

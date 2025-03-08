@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("Admin")
-public class HomeAdminController {
+public class AdminController {
     @GetMapping("")
     public String HomeAdmin(Model model){
         model.addAttribute("content", "Admin/HomeAdmin::content");

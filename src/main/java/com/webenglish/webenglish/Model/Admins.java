@@ -1,14 +1,16 @@
 package com.webenglish.webenglish.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,28 +20,29 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "ADMINS")
-public class Admins implements UserDetails {
+public class Admins implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false, length = 32)
-    @NotEmpty(message = "Tên người dùng không được để trống.")
     private String username;
-
-
-    @Column(nullable = false, length = 32)
-    @NotEmpty(message = "Mật khẩu không được để trống.")
-    private String password;
-
-    @Column(nullable = false)
-    @NotEmpty(message = "Email không được để trống.")
+    @Column(nullable = false, length = 320) // Consider adding unique constraint
     private String email;
-
+    @Column(nullable = false, length = 60)
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "AdminRole",
+            joinColumns = @JoinColumn(name = "adminId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId"))
+    private Set<Role> roles = new HashSet<>();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<Role> adminRoles = this.getRoles();
+        return adminRoles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .toList();
     }
+
     public Long getId() {
         return id;
     }
@@ -48,20 +51,8 @@ public class Admins implements UserDetails {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -72,6 +63,26 @@ public class Admins implements UserDetails {
         this.email = email;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+    @Override
+    public String getUsername() {
+        return username;
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -93,11 +104,12 @@ public class Admins implements UserDetails {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return
                 false;
-        Users user = (Users) o;
-        return getId() != null && Objects.equals(getId(), user.getId());
+        Admins admin = (Admins) o;
+        return getId() != null && Objects.equals(getId(), admin.getId());
     }
     @Override
     public int hashCode() {
         return getClass().hashCode();
     }
+    // Getters, setters, and other methods
 }

@@ -2,6 +2,7 @@ package com.webenglish.webenglish.Controller.Test;
 
 import com.webenglish.webenglish.Model.Exams;
 import com.webenglish.webenglish.Service.ExamsService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/Test")
-@RequiredArgsConstructor
 public class TestController {
-    @Autowired
+
     private final ExamsService examsService;
+
+    @Autowired
+    public TestController(ExamsService examsService) {
+        this.examsService = examsService; // Correctly initialized
+    }
     @GetMapping("")
     public String index(Model model) {
         List<Exams> exams = examsService.getAllExams(); // Example service call
