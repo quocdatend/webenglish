@@ -122,7 +122,7 @@
 </section>
 <!-- ***** Main Banner Area End ***** -->
 
-<section class="services" id="services">
+<section class="services" id="services" >
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -132,13 +132,118 @@
             </div>
             <div class="col-lg-12">
                 <div class="owl-service-item owl-carousel">
-                    <div class="item" th:each="service : ${services}">
+                    <div class="item">
                         <div class="service-item">
                             <div class="icon">
-                                <img th:src="@{${service.icon}}" alt="Service Icon">
+                                <img th:src="@{/layoutindex/assets/images/service-icon-03.png}" alt="">
                             </div>
-                            <h4 th:text="${service.name}"></h4>
-                            <p th:text="${service.description}"></p>
+                            <h4>English test</h4>
+                            <p>You can take our available tioec test and get your score after completing it.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="service-item">
+                            <div class="icon">
+                                <img th:src="@{/layoutindex/assets/images/service-icon-01.png}" alt="">
+                            </div>
+                            <h4>Vocablory</h4>
+                            <p>You can look up and understand more about new words in English.</p>
+                        </div>
+                    </div>            <div class="item">
+                    <div class="service-item">
+                        <div class="icon">
+                            <img th:src="@{/layoutindex/assets/images/service-icon-04.png}" alt="">                        </div>
+                        <h4>Grammar</h4>
+                        <p>You can review and learn more about English grammar.</p>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="our-courses" id="courses">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="section-heading">
+                    <h6>OUR COURSES</h6>
+                    <h4>What You Can <em>Learn</em></h4>
+                    <p>You just think about TemplateMo whenever you need free CSS templates for your business website</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="naccs">
+                    <div class="tabs">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="menu">
+                                    <div class="active gradient-border"><span>Vocablory</span></div>
+                                    <div class="gradient-border"><span>Grammar</span></div>
+                                    <div class="gradient-border"><span>Test With Me</span></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <ul class="nacc">
+                                    <li class="active">
+                                        <div>
+                                            <div class="left-image">
+                                                <img th:src="@{/layoutindex/assets/images/courses-01.jpg}" alt="">
+                                                <div class="price"><h6>$128</h6></div>
+                                            </div>
+                                            <div class="right-content">
+                                                <h4>Vocablory</h4>
+                                                <p></p>
+                                                <span>36 Hours</span>
+                                                <span>4 Weeks</span>
+                                                <span class="last-span">3 Certificates</span>
+                                                <div class="text-button">
+                                                    <a href="contact-us.html">Subscribe Course</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <div class="left-image">
+                                                <img th:src="@{/layoutindex/assets/images/courses-02.jpg}" alt="">
+                                                <div class="price"><h6>$156</h6></div>
+                                            </div>
+                                            <div class="right-content">
+                                                <h4>Grammar</h4>
+                                                <p>!</p>
+                                                <span>48 Hours</span>
+                                                <span>6 Weeks</span>
+                                                <span class="last-span">1 Certificate</span>
+                                                <div class="text-button">
+                                                    <a href="contact-us.html">Subscribe Course</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <div class="left-image">
+                                                <img th:src="@{/layoutindex/assets/images/courses-03.jpg}" alt="">
+                                                <div class="price"><h6>$184</h6></div>
+                                            </div>
+                                            <div class="right-content">
+                                                <p></p>
+                                                <h4>Test With Me</h4>
+
+                                                <span>28 Hours</span>
+                                                <span>4 Weeks</span>
+                                                <span class="last-span">1 Certificate</span>
+                                                <div class="text-button">
+                                                    <a href="contact-us.html">Subscribe Course</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,7 +251,6 @@
         </div>
     </div>
 </section>
-
 <section class="contact-us" id="contact-section" style="border-top: 6px solid;border-image: linear-gradient(to right, rgba(219, 138, 222, 1), rgba(246, 191, 159, 1)) 30;">
     <div class="container">
         <div class="row">
@@ -199,6 +303,68 @@
         </div>
     </div>
 </section>
+<script th:src="@{/layoutindex/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/layoutindex/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
+<script th:src="@{/layoutindex/assets/js/isotope.min.js}"></script>
+<script th:src="@{/layoutindex/assets/js/owl-carousel.js}"></script>
+<script th:src="@{/layoutindex/assets/js/lightbox.js}"></script>
+<script th:src="@{/layoutindex/assets/js/tabs.js}"></script>
+<script th:src="@{/layoutindex/assets/js/video.js}"></script>
+<script th:src="@{/layoutindex/assets/js/slick-slider.js}"></script>
+<script th:src="@{/layoutindex/assets/js/custom.js}"></script>
+
+<script>
+    //according to loftblog tut
+    $('.nav li:first').addClass('active');
+
+    var showSection = function showSection(section, isAnimate) {
+        var
+            direction = section.replace(/#/, ''),
+            reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+            reqSectionPos = reqSection.offset().top - 0;
+
+        if (isAnimate) {
+            $('body, html').animate({
+                scrollTop: reqSectionPos
+            },
+                800);
+        } else {
+            $('body, html').scrollTop(reqSectionPos);
+        }
+
+    };
+
+    var checkSection = function checkSection() {
+        $('.section').each(function () {
+            var
+                $this = $(this),
+                topEdge = $this.offset().top - 80,
+                bottomEdge = topEdge + $this.height(),
+                wScroll = $(window).scrollTop();
+            if (topEdge < wScroll && bottomEdge > wScroll) {
+                var
+                    currentId = $this.data('section'),
+                    reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+                reqLink.closest('li').addClass('active').
+                    siblings().removeClass('active');
+            }
+        });
+    };
+
+    $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+        e.preventDefault();
+        showSection($(this).attr('href'), true);
+    });
+
+    $(window).scroll(function () {
+        checkSection();
+    });
+    let accountContainer = document.querySelector(".account-container");
+
+    accountContainer.addEventListener("click", () => {
+        accountContainer.classList.toggle("active");
+    });
+</script>
 </body>
 </html>
