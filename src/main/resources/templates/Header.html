@@ -115,21 +115,21 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li><a th:href="@{/Home}">Home</a></li>
-                        <li><a th:href="@{/vocabulary/search}">Vocabulary</a></li>
-                        <li><a th:href="@{/grammar}">Grammar</a></li>
-                        <li th:if="${username != null}"><a th:href="@{/testing}">Test with me</a></li>
-                        <li th:if="${username == null}"><a th:href="@{/account}">Test with me</a></li>
-                        <li th:if="${username != null}" class="account-container">
+                        <li><a th:href="@{/Vocabulary/search}">Vocabulary</a></li>
+                        <li><a th:href="@{/Grammar}">Grammar</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/Testing}">Test with me</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/Account}">Test with me</a></li>
+                        <li sec:authorize="isAuthenticated()" class="account-container">
                             <button class="account-btn main-button-gradient">Account<i class="fas fa-solid fa-sort-down"></i></button>
                             <div class="info-box">
                                 <ul>
-                                    <li><a th:href="@{/account/profileUser}">Profile</a><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i></li>
-                                    <li><a th:href="@{/account/logout}">Logout</a><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i></li>
+                                    <li><a th:href="@{/Account/profileUser}">Profile</a><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i></li>
+                                    <li><a th:href="@{/logout}">Logout</a><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i></li>
                                 </ul>
                             </div>
                         </li>
-                        <li th:if="${username == null}" class="main-button-gradient">
-                            <a th:href="@{/account}" class="login-register">Login/Register</a>
+                        <li sec:authorize="!isAuthenticated()" class="main-button-gradient">
+                            <a th:href="@{/Login}" class="login-register" style="text-box: auto;">Login/Register</a>
                         </li>
                     </ul>
                     <a class='menu-trigger'>
@@ -140,20 +140,17 @@
             </div>
         </div>
     </div>
-
-</header>
-
-<!-- Scripts -->
-<script th:src="@{/layoutindex/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{/layoutindex/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/layoutindex/assets/js/isotope.min.js}"></script>
-<script th:src="@{/layoutindex/assets/js/owl-carousel.js}"></script>
-<script th:src="@{/layoutindex/assets/js/lightbox.js}"></script>
-<script th:src="@{/layoutindex/assets/js/tabs.js}"></script>
-<script th:src="@{/layoutindex/assets/js/video.js}"></script>
-<script th:src="@{/layoutindex/assets/js/slick-slider.js}"></script>
-<script th:src="@{/layoutindex/assets/js/custom.js}"></script>
-<script>
+    <!-- Scripts -->
+    <script th:src="@{/layoutindex/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/layoutindex/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/layoutindex/assets/js/isotope.min.js}"></script>
+    <script th:src="@{/layoutindex/assets/js/owl-carousel.js}"></script>
+    <script th:src="@{/layoutindex/assets/js/lightbox.js}"></script>
+    <script th:src="@{/layoutindex/assets/js/tabs.js}"></script>
+    <script th:src="@{/layoutindex/assets/js/video.js}"></script>
+    <script th:src="@{/layoutindex/assets/js/slick-slider.js}"></script>
+    <script th:src="@{/layoutindex/assets/js/custom.js}"></script>
+    <script>
     // Navigation highlight and scroll behavior
     $('.nav li:first').addClass('active');
 
@@ -192,12 +189,15 @@
         checkSection();
     });
 
-    let accountContainer = document.querySelector(".account-container");
+    var accountContainer = document.querySelector(".account-container");
     if (accountContainer) {
         accountContainer.addEventListener("click", () => {
             accountContainer.classList.toggle("active");
         });
     }
 </script>
+</header>
+
+
 </body>
 </html>

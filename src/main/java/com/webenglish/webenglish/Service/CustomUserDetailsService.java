@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 //    private PaymentHistoryService paymentHistoryService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users users = userRepository.getUserByUsername(username);
+//        Users users = userRepository.getUserByUsername(username);
 //        if(users != null) {
 //            paymentHistoryService.getIfDurationIsTrue(users.getId(), users);
 //        }
