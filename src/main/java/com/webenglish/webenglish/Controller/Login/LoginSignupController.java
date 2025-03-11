@@ -74,4 +74,34 @@ public class LoginSignupController {
             return "redirect:/Home";
         }
     }
+
+    @GetMapping("/Login/ForgetPassword")
+    public String forgetpassword() {
+
+        return "Login/ForgetPass";
+    }
+
+    @PostMapping("/Login/ForgetPassword")
+    public String checkemail() {
+
+        return "Login/ForgetPass";
+    }
+
+    @GetMapping("/Login/ForgetPassword/ConfirmCode")
+    public String comfirmcode() {
+
+        return "Login/ConfirmCode";
+    }
+
+    @GetMapping("/Login/ForgetPassword/Reset")
+    public String resetpassword() {
+
+        return "Login/ResetPass";
+    }
+
+    @PostMapping("/Login/ForgetPassword/Reset")
+    public String processresetpassword() {
+
+        return "";
+    }
 }
