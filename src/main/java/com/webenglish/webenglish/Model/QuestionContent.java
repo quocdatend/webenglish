@@ -19,7 +19,7 @@ public class QuestionContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CONTENTID")
-    private Integer id;
+    private long id;
 
     @Column(name = "QUESTIONS-STYLE", length = 100)
     private String questionStyle;
