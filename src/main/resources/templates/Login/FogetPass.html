@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${title}">Page Title</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/layoutlogin/fonts/material-icon/css/material-design-iconic-font.min.css}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/layoutlogin/css/style.css}">
+    <title>Forgot Password Form</title>
+    <title>Forgot Password Form</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            width: 300px;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #4a4a4a;
+        }
+
+        .container p {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #8b8b8b;
+        }
+
+        .form-field {
+            margin-bottom: 10px;
+        }
+
+        .form-field label {
+            display: inline-block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #4a4a4a;
+        }
+
+        .form-field input[type=email] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+        }
+
+        .container button[type=submit] {
+            background-color: #4dd0e1;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .container button[type=submit]:hover {
+            background-color: #26b8c3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main">
+    <div class="container">
+        <h1>Forgot Password</h1>
+        <p>Enter your email address and we'll send you a password reset link!</p>
+
+        <form th:action="@{/forgot-password}" method="POST">
+            <div class="form-field">
+                <label for="email">Email Address:</label>
+                <input type="email" name="email" id="email" th:value="${email}" required>
+            </div>
+
+            <div th:if="${email != null}">
+                <h5 th:if="${isTrue}">Xác nhận thành công!</h5>
+                <h5 th:unless="${isTrue}">Email chưa được đăng ký!</h5>
+            </div>
+
+            <button type="submit" id="btnSubmit">Send Password Reset Link</button>
+        </form>
+
+        <div th:if="${email != null and isTrue}">
+            <form th:action="@{/enter-code}" method="POST">
+                <button type="submit" id="btnEnterCode">Click here!</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- JS -->
+<script th:src="@{/layoutlogin/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/layoutlogin/js/main.js}"></script>
+</body>
+</html>
