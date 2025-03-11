@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Simulation Test</title>
+  <link th:href="@{/layoutadmin/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css"  media="all" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet"  media="all" >
+
+  <title>EduWell - Education HTML5 Template</title>
+
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/layoutindex/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css" media="all" >
+
+  <!-- Additional CSS Files -->
+  <link th:href="@{/layoutindex/assets/css/button-search.css}" rel="stylesheet" type="text/css" media="all" >
+  <link th:href="@{/layoutindex/assets/css/fontawesome.css}" rel="stylesheet" type="text/css" media="all" >
+  <link th:href="@{/layoutindex/assets/css/templatemo-eduwell-style.css}" rel="stylesheet" type="text/css" media="all" >
+  <link th:href="@{/layoutindex/assets/css/owl.css}" rel="stylesheet" type="text/css" media="all" >
+  <link th:href="@{/layoutindex/assets/css/lightbox.css}" rel="stylesheet" type="text/css" media="all" >
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .badge {
+        display: inline-block;
+        background: #e0e0e0;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 14px;
+        margin-right: 5px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .tab-container {
+        display: flex;
+        margin: 20px 0;
+    }
+    .tab {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+    }
+    .active-tab {
+        border-bottom: 3px solid blue;
+        font-weight: bold;
+    }
+    .info-box {
+        background: #fffbcc;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    .btn-start {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background: blue;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="~{Header :: Header}"></div>
+<div class="container">
+  <span class="badge" th:text="'#' + ${testType}"></span>
+  <span class="badge" th:text="'#' + ${testCategory}"></span>
+
+  <h1 th:text="${testTitle}">IELTS Simulation Listening Test 1</h1>
+
+  <div class="tab-container">
+    <div class="tab active-tab">Thông tin đề thi</div>
+    <div class="tab">Đáp án/transcript</div>
+  </div>
+
+  <p>⏳ <strong>Thời gian làm bài:</strong> <span th:text="${testDuration}"></span> phút |
+    <span th:text="${testSections}"></span> phần thi |
+    <span th:text="${testQuestions}"></span> câu hỏi |
+    <span th:text="${testComments}"></span> bình luận</p>
+
+  <p>👥 <strong><span th:text="${testParticipants}"></span> người</strong> đã luyện tập đề thi này</p>
+
+  <p style="color: red; font-style: italic;">
+    Chú ý: để được quy đổi sang scaled score (ví dụ trên thang điểm 990 cho TOEIC hoặc 9.0 cho IELTS),
+    vui lòng chọn chế độ làm FULL TEST.
+  </p>
+
+  <div class="tab-container">
+    <div class="tab">Luyện tập</div>
+    <div class="tab active-tab">Làm full test</div>
+    <div class="tab">Thảo luận</div>
+  </div>
+
+  <div class="info-box">
+    ⚠️ Sẵn sàng để bắt đầu làm full test? Để đạt kết quả tốt nhất, bạn cần dành ra
+    <span th:text="${testDuration}"></span> phút cho bài test này.
+  </div>
+
+  <a th:href="@{/start-test}" class="btn-start">BẮT ĐẦU THI</a>
+</div>
+<script th:src="@{/layoutindex/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/layoutindex/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<script th:src="@{/layoutindex/assets/js/isotope.min.js}"></script>
+<script th:src="@{/layoutindex/assets/js/owl-carousel.js}"></script>
+<script th:src="@{/layoutindex/assets/js/lightbox.js}"></script>
+<script th:src="@{/layoutindex/assets/js/tabs.js}"></script>
+<script th:src="@{/layoutindex/assets/js/video.js}"></script>
+<script th:src="@{/layoutindex/assets/js/slick-slider.js}"></script>
+<script th:src="@{/layoutindex/assets/js/custom.js}"></script>
+
+<script>
+  //according to loftblog tut
+  $('.nav li:first').addClass('active');
+
+  var showSection = function showSection(section, isAnimate) {
+      var
+          direction = section.replace(/#/, ''),
+          reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+          reqSectionPos = reqSection.offset().top - 0;
+
+      if (isAnimate) {
+          $('body, html').animate({
+              scrollTop: reqSectionPos
+          },
+              800);
+      } else {
+          $('body, html').scrollTop(reqSectionPos);
+      }
+
+  };
+
+  var checkSection = function checkSection() {
+      $('.section').each(function () {
+          var
+              $this = $(this),
+              topEdge = $this.offset().top - 80,
+              bottomEdge = topEdge + $this.height(),
+              wScroll = $(window).scrollTop();
+          if (topEdge < wScroll && bottomEdge > wScroll) {
+              var
+                  currentId = $this.data('section'),
+                  reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+              reqLink.closest('li').addClass('active').
+                  siblings().removeClass('active');
+          }
+      });
+  };
+
+  $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+      e.preventDefault();
+      showSection($(this).attr('href'), true);
+  });
+
+  $(window).scroll(function () {
+      checkSection();
+  });
+  let accountContainer = document.querySelector(".account-container");
+
+  accountContainer.addEventListener("click", () => {
+      accountContainer.classList.toggle("active");
+  });
+</script>
+</body>
+</html>
