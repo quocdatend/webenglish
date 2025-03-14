@@ -13,11 +13,7 @@ public class UserResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ResponseID")
-    private Integer responseId;
-
-//    @ManyToOne
-//    @JoinColumn(name = "UserID", referencedColumnName = "ID")
-//    private Account user;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "ExamID", referencedColumnName = "EXAMID")
@@ -29,6 +25,11 @@ public class UserResponse {
 
     @Column(name = "UserAnswer", length = 1)
     private String userAnswer;
+
+
+    @ManyToOne
+    @JoinColumn(name = "ExamHistoryID", referencedColumnName = "ScoreID", nullable = false)
+    private ExamHistory examHistory;
 
     @Column(name = "IsCorrect")
     private Integer isCorrect;

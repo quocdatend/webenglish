@@ -17,7 +17,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "QUESTIONID")
-    private Integer id;
+    private long id;
 
     @Column(name = "QUESTIONTEXT", columnDefinition = "TEXT")
     private String questionText;
@@ -39,5 +39,6 @@ public class Question {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CONTENTID")
+    @ToString.Exclude
     private QuestionContent content;
 }

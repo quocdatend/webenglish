@@ -173,15 +173,15 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <div class="owl-service-item owl-carousel">
-                    <div th:each="exam : ${examList}" class="item">
-                        <a th:href="@{/doTest/{id}(id=${exam.id})}" class="exam-card">
+                <div class="row">
+                    <div th:each="exam : ${examList}" class="col-lg-4">
+                        <a th:href="@{/Test/Testdetail/{id}(id=${exam.id})}" class="exam-card">
                             <div class="service-item">
                                 <div class="icon">
                                     <img th:src="@{/layoutindex/assets/images/service-icon-01.png}" alt="">
                                 </div>
                                 <h4 th:text="${exam.examName}"></h4>
-                                <p><strong>Time:</strong> <span th:text="${exam.examTime}"></span></p>
+                                <p><strong>Time:</strong> <span th:text="${exam.examTime}"></span> minutes</p>
                                 <p><strong>Details:</strong> <span th:text="${exam.examDetails}"></span></p>
                             </div>
                         </a>
