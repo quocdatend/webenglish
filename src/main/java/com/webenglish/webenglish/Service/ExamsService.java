@@ -19,8 +19,9 @@ public class ExamsService {
         return examsRepository.findAll();
     }
 
-    public Optional<Exams> getExamById(long id) {
-        return examsRepository.findById(id);
+    public Exams getExamById(Long id) {
+        return examsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Exam not found with id: " + id));
     }
 
     public Exams saveExam(Exams exam) {

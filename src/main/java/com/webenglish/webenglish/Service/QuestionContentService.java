@@ -13,34 +13,13 @@ public class QuestionContentService {
 
     @Autowired
     private QuestionContentRepository questionContentRepository;
-
-    // Retrieve all question contents
     public List<QuestionContent> getAllQuestionContents() {
         return questionContentRepository.findAll();
     }
-
-    // Retrieve question content by ID
-//    public QuestionContent getQuestionContentById(long id) {
-//        Optional<QuestionContent> questionContent = questionContentRepository.findById(id);
-//        return questionContent.orElse(null);
-//    }
-
-
-//    public List<QuestionContent> getQuestionContentsByExamId(long examId) {
-//        return questionContentRepository.findAllById();
-//    }
-
-    // Save or update question content
-    public QuestionContent saveQuestionContent(QuestionContent questionContent) {
-        return questionContentRepository.save(questionContent);
+    public List<QuestionContent> getQuestionContentsByExamId(long examId) {
+        return questionContentRepository.findByExamId(examId);
     }
-
-//    // Delete question content by ID with validation
-//    public boolean deleteQuestionContent(Integer id) {
-//        if (questionContentRepository.existsById(id)) {
-//            questionContentRepository.deleteById(id);
-//            return true;
-//        }
-//        return false; // ID not found
-//    }
+    public int quantity_QC_byexamid(long examId){
+        return questionContentRepository.findByExamId(examId).size();
+    }
 }

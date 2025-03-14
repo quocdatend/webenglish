@@ -22,13 +22,15 @@ public class Exams {
     @Column(name = "EXAMNAME", length = 100)
     private String examName;
 
-    @Column(name = "EXAMTIME", length = 100)
-    private String examTime;
+    @Column(name = "EXAMTIME")
+    private Integer examTime;
 
     @Column(name = "EXAMSDETAL", length = 100)
+
     private String examDetails;
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<QuestionContent> questionContents;
 
 }

@@ -1,10 +1,177 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Testing Page</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f8f9fa;
+          color: #333;
+        }
+
+        .container-fluid {
+          padding: 20px;
+        }
+
+        .card {
+          margin-bottom: 20px;
+          border: none;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+          background-color: #4e73df;
+          color: white;
+          border-radius: 10px 10px 0 0;
+          padding: 15px;
+        }
+
+        .card-body {
+          padding: 20px;
+        }
+
+        .table-responsive {
+          overflow-x: auto;
+        }
+
+        .table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 0;
+        }
+
+        .table th,
+        .table td {
+          padding: 12px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+          background-color: #4e73df;
+          color: white;
+        }
+
+        .table tr:hover {
+          background-color: #f1f1f1;
+        }
+
+        .btn {
+          padding: 8px 12px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+          margin-right: 5px;
+        }
+
+        .btn-info {
+          background-color: #17a2b8;
+          color: white;
+        }
+
+        .btn-warning {
+          background-color: #ffc107;
+          color: white;
+        }
+
+        .btn-danger {
+          background-color: #dc3545;
+          color: white;
+        }
+
+        .btn-success {
+          background-color: #28a745;
+          color: white;
+        }
+
+        .btn:hover {
+          opacity: 0.9;
+        }
+
+        .form-group {
+          margin-bottom: 15px;
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          font-size: 14px;
+        }
+
+        .form-control:focus {
+          border-color: #4e73df;
+          outline: none;
+          box-shadow: 0 0 5px rgba(78, 115, 223, 0.5);
+        }
+
+        .h3 {
+          color: #4e73df;
+        }
+
+        .text-primary {
+          color: #4e73df !important;
+        }
+
+        .text-gray-800 {
+          color: #333;
+        }
+
+        .align-items-center {
+          align-items: center;
+        }
+
+        .row {
+          display: flex;
+          flex-wrap: wrap;
+          margin-right: -15px;
+          margin-left: -15px;
+        }
+
+        .col {
+          flex: 1;
+          padding: 0 15px;
+        }
+
+        .mb-4 {
+          margin-bottom: 1.5rem !important;
+        }
+
+        .mb-2 {
+          margin-bottom: 0.5rem !important;
+        }
+
+        .py-3 {
+          padding-top: 1rem !important;
+          padding-bottom: 1rem !important;
+        }
+
+        .shadow {
+          box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+        }
+
+        .font-weight-bold {
+          font-weight: 700 !important;
+        }
+
+        .text-white {
+          color: #fff !important;
+        }
+
+        .bg-primary {
+          background-color: #4e73df !important;
+        }
+
+        .btn i {
+          margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -97,34 +264,22 @@
             <h6 class="m-0 font-weight-bold text-primary">Edit/Add Question Content</h6>
         </div>
         <div class="card-body">
-            <form th:action="@{/admin/SaveQuestionContent}" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="contentid">ID</label>
-                    <input type="text" class="form-control" id="contentid" name="contentid" th:value="${questionsContent.contentid}" readonly>
-                </div>
+            <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="questionsStyle">Style</label>
-                    <input type="text" class="form-control" id="questionsStyle" name="questionsStyle" th:value="${questionsContent.questionsStyle}" required>
+                    <input type="text" class="form-control" id="questionsStyle" name="questionsStyle"  required>
                 </div>
                 <div class="form-group">
                     <label for="picture">Picture</label>
                     <input type="file" class="form-control" id="picture" name="picture">
-                    <img th:if="${questionsContent.picture != null}" th:src="${questionsContent.picture}" alt="Image" width="200" class="mt-2">
                 </div>
                 <div class="form-group">
                     <label for="textContent">Text Content</label>
-                    <textarea class="form-control" id="textContent" name="textContent" th:text="${questionsContent.textContent}" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="adudi">Audio</label>
-                    <input type="file" class="form-control" id="adudi" name="adudi">
-                    <audio th:if="${questionsContent.adudi != null}" controls class="mt-2">
-                        <source th:src="${questionsContent.adudi}" type="audio/ogg">
-                    </audio>
+                    <textarea class="form-control" id="textContent" name="textContent"  required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="textQuestionsbigIfhave">Text Question</label>
-                    <textarea class="form-control" id="textQuestionsbigIfhave" name="textQuestionsbigIfhave" th:text="${questionsContent.textQuestionsbigIfhave}"></textarea>
+                    <textarea class="form-control" id="textQuestionsbigIfhave" name="textQuestionsbigIfhave"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>

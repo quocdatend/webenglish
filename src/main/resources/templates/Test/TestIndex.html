@@ -175,7 +175,7 @@
             <div class="col-lg-12">
                 <div class="owl-service-item owl-carousel">
                     <div th:each="exam : ${examList}" class="item">
-                        <a th:href="@{/doTest/{id}(id=${exam.id})}" class="exam-card">
+                        <a th:href="@{/Test/Testdetail/{id}(id=${exam.id})}" class="exam-card">
                             <div class="service-item">
                                 <div class="icon">
                                     <img th:src="@{/layoutindex/assets/images/service-icon-01.png}" alt="">

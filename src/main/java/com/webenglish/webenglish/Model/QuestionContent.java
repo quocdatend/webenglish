@@ -21,26 +21,30 @@ public class QuestionContent {
     @Column(name = "CONTENTID")
     private long id;
 
-    @Column(name = "QUESTIONS-STYLE", length = 100)
+    @Column(name = "QUESTIONS_STYLE", length = 100)
     private String questionStyle;
 
     @Column(name = "PICTURE", length = 255)
     private String picture;
 
-    @Column(name = "TEXT-CONTENT", length = 255)
+    @Column(name = "TEXT_CONTENT", length = 255)
     private String textContent;
 
-    @Column(name = "ADUDI", length = 255)
+    @Column(name = "AUDIO", length = 255)
     private String audio;
 
-    @Column(name = "Text-questionsbig-ifhave", length = 255)
+    @Column(name = "Text_questionsbig_ifhave", columnDefinition = "TEXT")
+    @Lob
     private String bigQuestionText;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EXAMID")
+    @ToString.Exclude
     private Exams exam;
-//
 
     @OneToMany(mappedBy = "content", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Question> questions;
+
+
 }

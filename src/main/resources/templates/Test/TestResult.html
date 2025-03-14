@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết Quả</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; padding: 50px; }
+        .container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 50%; margin: auto; }
+        .score { font-size: 24px; font-weight: bold; color: green; }
+        .summary { font-size: 18px; margin: 10px 0; }
+        .retry-btn { padding: 10px 20px; background-color: blue; color: white; border: none; cursor: pointer; border-radius: 5px; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Kết Quả Bài Kiểm Tra</h1>
+    <p class="score">Điểm số: <span th:text="${score}"></span>%</p>
+    <p class="summary">Số câu đúng: <span th:text="${correctAnswers}"></span></p>
+    <p class="summary">Số câu sai: <span th:text="${wrongAnswers}"></span></p>
+    <p class="summary">Tổng số câu hỏi: <span th:text="${totalQuestions}"></span></p>
+
+    <a href="javascript:void(0);" class="retry-btn" onclick="goBack()">Làm lại bài kiểm tra</a>
+
+
+</div>
+<script>
+    function goBack() {
+        window.history.back(); // Quay lại trang trước đó
+    }
+</script>
+</body>
+</html>
