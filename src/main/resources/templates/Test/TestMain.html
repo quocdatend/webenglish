@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Simulation Test</title>
+  <link th:href="@{/layoutadmin/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css" media="all" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet" media="all">
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/layoutindex/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css" media="all">
+  <!-- Additional CSS Files -->
+  <link th:href="@{/layoutindex/assets/css/button-search.css}" rel="stylesheet" type="text/css" media="all">
+  <link th:href="@{/layoutindex/assets/css/fontawesome.css}" rel="stylesheet" type="text/css" media="all">
+  <link th:href="@{/layoutindex/assets/css/templatemo-eduwell-style.css}" rel="stylesheet" type="text/css" media="all">
+  <link th:href="@{/layoutindex/assets/css/owl.css}" rel="stylesheet" type="text/css" media="all">
+  <link th:href="@{/layoutindex/assets/css/lightbox.css}" rel="stylesheet" type="text/css" media="all">
+
+  <!-- CSS cho đồng hồ -->
+  <style>
+    #timer {
+      font-size: 28px;
+      font-weight: 600;
+      color: #ffffff;
+      background: linear-gradient(-145deg, rgba(219, 138, 222, 1) 0%, rgba(246, 191, 159, 1) 100%);
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      width: fit-content;
+      font-family: 'Open Sans', sans-serif;
+    }
+    /* Đảm bảo không ảnh hưởng đến header */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Bố cục chung */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề bài kiểm tra */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Hiển thị thời gian còn lại */
+#timeRemainingContainer {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d9534f;
+    background: #fff3cd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Bảng câu hỏi */
+.question-container {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.question-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+}
+
+.options label {
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.options label:hover {
+    background: #d6d8db;
+}
+
+/* Nút gửi bài */
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: #218838;
+}
+
+  </style>
+</head>
+<body>
+<section class="services" id="services">
+  <div>
+    <p>Thời gian còn lại: <span id="timeRemaining" th:text="${timeRemainingSeconds}"></span> giây</p>
+
+  </div>
+  <div class="container">
+    <h1 th:text="${exam.examName}"></h1>
+    <p><strong>Time:</strong> <span th:text="${exam.examTime}"></span> phút</p>
+
+    <form th:action="@{/Test/submit}" method="post">
+      <div th:each="item1 : ${danhsachQC}" class="card">
+        <div class="card-header">
+          Bài: <span th:text="${item1.id}"></span>
+        </div>
+        <div class="card-header">
+          <span th:text="${item1.textContent}"></span>
+        </div>
+        <div th:if="${item1.bigQuestionText}" class="card-header">
+          <span th:text="${item1.bigQuestionText}"></span>
+        </div>
+        <div th:each="item : ${questions}">
+          <div th:if="${item.content.id == item1.id}">
+            <div class="card-header">
+              <span th:text="${item.questionText}"></span>
+            </div>
+            <div class="card-body">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:name="${item.id}" value="A" th:id="'question_' + ${item.id} + '_a'">
+                <label class="form-check-label" th:for="'question_' + ${item.id} + '_a'" th:text="${item.answerA}"></label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:name="${item.id}" value="B" th:id="'question_' + ${item.id} + '_b'">
+                <label class="form-check-label" th:for="'question_' + ${item.id} + '_b'" th:text="${item.answerB}"></label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:name="${item.id}" value="C" th:id="'question_' + ${item.id} + '_c'">
+                <label class="form-check-label" th:for="'question_' + ${item.id} + '_c'" th:text="${item.answerC}"></label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:name="${item.id}" value="D" th:id="'question_' + ${item.id} + '_d'">
+                <label class="form-check-label" th:for="'question_' + ${item.id} + '_d'" th:text="${item.answerD}"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Nộp bài</button>
+    </form>
+  </div>
+</section>
+
+<!-- Thêm script để cập nhật thời gian -->
+<script th:src="@{/layoutindex/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/layoutindex/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script>
+  let timeRemaining = [[${timeRemainingSeconds}]]; // Lấy từ server
+let timerInterval = setInterval(updateTimer, 1000);
+
+function updateTimer() {
+  if (timeRemaining > 0) {
+    timeRemaining--;
+    document.getElementById("timeRemaining").textContent = formatTime(timeRemaining);
+  } else {
+    clearInterval(timerInterval);
+    alert("Hết thời gian! Bài thi sẽ tự động nộp.");
+    window.location.href = "/submitTest"; // Chuyển hướng nộp bài khi hết giờ
+  }
+}
+
+function formatTime(seconds) {
+  let hours = Math.floor(seconds / 3600);
+  let minutes = Math.floor((seconds % 3600) / 60);
+  let secs = seconds % 60;
+  return `${padZero(hours)}:${padZero(minutes)}:${padZero(secs)}`;
+}
+
+function padZero(num) {
+  return num < 10 ? "0" + num : num;
+}
+
+// Hiển thị thời gian ban đầu ngay khi trang tải
+document.getElementById("timeRemaining").textContent = formatTime(timeRemaining);
+</script>
+
+</body>
+</html>

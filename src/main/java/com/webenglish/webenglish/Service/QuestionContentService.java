@@ -13,34 +13,26 @@ public class QuestionContentService {
 
     @Autowired
     private QuestionContentRepository questionContentRepository;
-
-    // Retrieve all question contents
     public List<QuestionContent> getAllQuestionContents() {
         return questionContentRepository.findAll();
     }
-
-    // Retrieve question content by ID
-//    public QuestionContent getQuestionContentById(long id) {
-//        Optional<QuestionContent> questionContent = questionContentRepository.findById(id);
-//        return questionContent.orElse(null);
-//    }
-
-
-//    public List<QuestionContent> getQuestionContentsByExamId(long examId) {
-//        return questionContentRepository.findAllById();
-//    }
-
-    // Save or update question content
-    public QuestionContent saveQuestionContent(QuestionContent questionContent) {
-        return questionContentRepository.save(questionContent);
+    public List<QuestionContent> getQuestionContentsByExamId(long examId) {
+        return questionContentRepository.findByExamId(examId);
+    }
+    public int quantity_QC_byexamid(long examId){
+        return questionContentRepository.findByExamId(examId).size();
+    }
+    // Save or update a question content
+    public void saveQuestionContent(QuestionContent questionContent) {
+        questionContentRepository.save(questionContent);
     }
 
-//    // Delete question content by ID with validation
-//    public boolean deleteQuestionContent(Integer id) {
-//        if (questionContentRepository.existsById(id)) {
-//            questionContentRepository.deleteById(id);
-//            return true;
-//        }
-//        return false; // ID not found
-//    }
+    // Delete a question content by ID
+    public void deleteQuestionContent(long id) {
+        questionContentRepository.deleteById(id);
+    }
+    public QuestionContent getQuestionContentById(long id) {
+        Optional<QuestionContent> optionalQC = questionContentRepository.findById(id);
+        return optionalQC.orElse(null);
+    }
 }

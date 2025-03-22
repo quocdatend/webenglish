@@ -117,7 +117,7 @@
                         <li><a th:href="@{/Home}">Home</a></li>
                         <li><a th:href="@{/Vocabulary/search}">Vocabulary</a></li>
                         <li><a th:href="@{/Grammar}">Grammar</a></li>
-                        <li sec:authorize="isAuthenticated()"><a th:href="@{/Testing}">Test with me</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/Test}">Test with me</a></li>
                         <li sec:authorize="!isAuthenticated()"><a th:href="@{/Account}">Test with me</a></li>
                         <li sec:authorize="isAuthenticated()" class="account-container">
                             <button class="account-btn main-button-gradient">Account<i class="fas fa-solid fa-sort-down"></i></button>
