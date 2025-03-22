@@ -2,6 +2,7 @@ package com.webenglish.webenglish.Service;
 
 import com.webenglish.webenglish.Model.Exams;
 import com.webenglish.webenglish.Repository.ExamsRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +20,9 @@ public class ExamsService {
         return examsRepository.findAll();
     }
 
-    public Optional<Exams> getExamById(long id) {
-        return examsRepository.findById(id);
+    public Exams getExamById(Long id) {
+        return examsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Exam not found with id: " + id));
     }
 
     public Exams saveExam(Exams exam) {
@@ -30,4 +32,9 @@ public class ExamsService {
     public void deleteExam(long id) {
         examsRepository.deleteById(id);
     }
+    public Exams getExamByIdOrThrow(long examId) {
+        return examsRepository.findById(examId)
+                .orElseThrow(() -> new EntityNotFoundException("Exam not found with id: " + examId));
+    }
+
 }

@@ -16,19 +16,16 @@ public class ExamHistory {
     @Column(name = "ScoreID")
     private Integer scoreId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "UserID", referencedColumnName = "ID", nullable = false)
-//    private Account user;
+    @ManyToOne
+    @JoinColumn(name = "UserID", referencedColumnName = "id", nullable = false)
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "ExamID", referencedColumnName = "EXAMID", nullable = false)
     private Exams exam;
 
-    @Column(name = "StartTime")
-    private LocalDateTime startTime;
-
-    @Column(name = "EndTime")
-    private LocalDateTime endTime;
+    @Column(name = "examDuration")
+    private String examDuration;
 
     @Column(name = "Score", nullable = false)
     private Double score;
